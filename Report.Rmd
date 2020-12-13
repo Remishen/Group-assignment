@@ -1,0 +1,99 @@
+---
+title: "Assignment 6"
+author: "Jiahao Shen, Fangyu Ruan, Wenqi Gao, Phil Mendoza, Chris Kim"
+date: "12/13/2020"
+output: html_document
+---
+
+## Task I
+```{r}
+# Introduction of our activity: 
+# Pinch your nose and turn yourself 15 times. Then immediately use app called "AnaHertz" to record the information of our balanced capacity in 10 seconds. The app could automatically set the time so the data collected is accurate.
+# The variable xGyro measures the stability of our hand holding the phone. It is concrete, continuous and countable. And some members of the group are experts and some are novices.
+```
+
+## Task II
+```{r}
+# Loading the library we will use later
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(GGally)
+
+# Dealing with the raw data of xGyro from "AnaHertz"
+d1 = read.csv("chloe.csv", header = TRUE)[-201,-c(1,2)]
+d2 = read.csv("chris.csv", header = TRUE)[-201,-c(1,2)]
+d3 = read.csv("fangyu.csv",header = TRUE)[-201,-c(1,2)]
+d4 = read.csv("jiahao.csv",header = TRUE)[-201,-c(1,2)]
+d5 = read.csv("phil.csv",  header = TRUE)[-201,-c(1,2)]
+D1 = rbind(d1,d2,d3,d4,d5)
+rownames(D1) = c("chloe","chris","fangyu","jiahao","phil")
+
+# Using K-means to distinguish the experts and novices
+D2 = data.frame(scale(D1))
+fit = kmeans(D2, 2)
+fit$cluster
+D3 = data.frame(D2, fit$cluster)
+colnames(D3) = c(1:200,"cluster")
+D4 = gather(D3, "time", "xGyro", 1:200)
+
+# Visualize our results using ggplot2
+D5 = D4 %>% group_by(time, cluster) %>% summarise(avg = mean(xGyro))
+D5$time <- as.numeric(D5$time)
+D5$cluster <- as.factor(D5$cluster)
+ggplot(D5, aes(time, avg, colour = cluster)) + geom_line() + xlab("Time") + ylab("Average xGyro")
+
+# According to the ggplot, we can see that people in cluster 1 has weaker swings in average xGyro, which means he or she is more stable than those in cluster 1.
+# People in cluster 1: Chloe, Chris, Fangyu and Phil are experts in balanced capacity.
+# People in cluster 2: Jiahao is novice in balanced capacity.
+```
+
+## Task III
+```{r}
+# Dealing with the raw data of five questions
+Q1 = read.csv("Questions.csv", header = TRUE)
+colnames(Q1) = c("name","confidence", "difficulty", "experience", "relevance", "dazzling", "gender")
+
+# Plot correlation matrices
+ggpairs(Q1, 2:6, progress = FALSE)
+ggcorr(Q1[,-c(1,7)], method = c("everything", "pearson"))
+
+# Run a PCA analysis on the data
+Q2 = Q1[,-c(1,7)]
+pca <- prcomp(Q2, scale. = TRUE)
+pca$sdev^2
+summary(pca)
+plot(pca, type = "lines")
+# According to the summary and plot of PCA, we see the proportion of variance of each principle component. 
+# We would drop the PC4 and PC5 because they only explain a very small proportion of variance.
+
+# Now create a data frame of the transformed data from our pca
+Q3 = data.frame(pca$x)
+
+# Print out the loadings for the components we generated
+pca$rotation
+loadings = abs(pca$rotation)
+loadings
+biplot(pca)
+
+# PC1 represents the maximum variance direction in our data.
+# According to loadings for the components, experience and confidence variables are the greatest contributor to PC1. Thus, PC1 might represents people's past experience with this activity and related confidence.
+
+# Visualize the PC1 results
+plot(Q3$PC1)
+# According to the plot, we see that Wenqi Gao has the greatest score in PC1 while Jiahao Shen has the lowest score in PC1. It means that Wenqi Gao is the most confident people in balancing ability in our group and also has the most experience with this balancing activity in five years while Jiahao Shen is on the contrary.
+```
+
+
+
+
+```{r}
+rowSums(D1[,1:200])
+dd1 = read.csv("jiahao.csv",header = TRUE)
+dd2 = read.csv("chloe.csv",header = TRUE)
+summary(dd1)
+summary(dd2)
+plot(dd1$time,dd1$xGyro)
+plot(dd2$time,dd2$xGyro)
+```
+
