@@ -84,16 +84,10 @@ plot(Q3$PC1)
 # According to the plot, we see that Wenqi Gao has the greatest score in PC1 while Jiahao Shen has the lowest score in PC1. It means that Wenqi Gao is the most confident people in balancing ability in our group and also has the most experience with this balancing activity in five years while Jiahao Shen is on the contrary.
 ```
 
-
-
-
+## Task IV
 ```{r}
-rowSums(D1[,1:200])
-dd1 = read.csv("jiahao.csv",header = TRUE)
-dd2 = read.csv("chloe.csv",header = TRUE)
-summary(dd1)
-summary(dd2)
-plot(dd1$time,dd1$xGyro)
-plot(dd2$time,dd2$xGyro)
+# Choose one thing to predict the score for each member of your group 
+# Visualization that supports your conclusion
+# Devise an intervention
 ```
 
