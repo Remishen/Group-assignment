@@ -87,7 +87,25 @@ plot(Q3$PC1)
 ## Task IV
 ```{r}
 # Choose one thing to predict the score for each member of your group 
+# We choose the raw data time and xGyro variable as our predictors for each member of our group. By looking at the absolute max value of xGyro, we could find out the tipping point when each of us started to exhibit more stability. If people reached the tipping point much earlier than the others, it means they have greater balance skills, which means they could be expert in this activity, and vice versa. Besides, bigger absolute value also indicates instability. By balancing these two raw data variables, we could predict the score for each member of our group.
+
 # Visualization that supports your conclusion
+
+chloe = data.frame(read.csv("chloe.csv", header = TRUE))
+chris = data.frame(read.csv("chris.csv", header = TRUE))
+fangyu = data.frame(read.csv("fangyu.csv",header = TRUE))
+jiahao = data.frame(read.csv("jiahao.csv",header = TRUE))
+phil = data.frame(read.csv("phil.csv",  header = TRUE))
+
+ggplot(chloe,aes(x=time,y=xGyro)) + geom_line()+ labs(title = "chloe")
+ggplot(chris,aes(x=time,y=xGyro)) + geom_line()+ labs(title = "chris")
+ggplot(fangyu,aes(x=time,y=xGyro)) + geom_line()+ labs(title = "fangyu")
+ggplot(jiahao,aes(x=time,y=xGyro)) + geom_line()+ labs(title = "jiahao")
+ggplot(phil,aes(x=time,y=xGyro)) + geom_line()+ labs(title = "phil")
+
+# As you can see from the plot, Chris reached his tipping point at around 4;Chloe reached her tipping point around 2.5; Fangyu reached her tipping point at near 5; Jiahao's tipping point is hardly deducible from the plot, and it seems he has been experiencing unbalance in 10s ; and Phil's plot is fluctuating before around 6. We can tell from the plots that Chloe is definitely an expert in doing the activity, while the rest of us are novices. This prediction, again, supports our argument.
+
 # Devise an intervention
+# Intervention: When the human body is in a fast-moving environment or an object moves quickly in front of us, the balancer in our inner ear may be stimulated. In each of our rotations, if our eyes are always focused on a point in the distance, the head is always the last part to rotate with the body, and the head turns back to the point quickly, we would feel, in this way, less dazzled and the vertigo is significantly reduced, as the external lymph does not get enough power during the rotation. 
 ```
 
