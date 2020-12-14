@@ -103,7 +103,7 @@ ggplot(fangyu,aes(x=time,y=xGyro)) + geom_line()+ labs(title = "fangyu")
 ggplot(jiahao,aes(x=time,y=xGyro)) + geom_line()+ labs(title = "jiahao")
 ggplot(phil,aes(x=time,y=xGyro)) + geom_line()+ labs(title = "phil")
 
-# As you can see from the plot, Chris reached his tipping point at around 4;Chloe reached her tipping point around 2.5; Fangyu reached her tipping point at near 5; Jiahao's tipping point is hardly deducible from the plot, and it seems he has been experiencing unbalance in 10s ; and Phil's plot is fluctuating before around 6. We can tell from the plots that Chloe is definitely an expert in doing the activity, while the rest of us are novices. This prediction, again, supports our argument.
+# As you can see from the plot, Chris reached his tipping point at around 4;Chloe reached her tipping point around 2.5; Fangyu reached her tipping point at near 5; Jiahao's tipping point is hardly deducible from the plot, and it seems he has been experiencing unbalance in 10s ; and Phil's plot is fluctuating before around 6. We can tell from the plots that Chloe is definitely an expert in doing the activity, while jiahao is obvious a novice. This prediction, again, supports our argument.
 
 # Devise an intervention
 # Intervention: When the human body is in a fast-moving environment or an object moves quickly in front of us, the balancer in our inner ear may be stimulated. In each of our rotations, if our eyes are always focused on a point in the distance, the head is always the last part to rotate with the body, and the head turns back to the point quickly, we would feel, in this way, less dazzled and the vertigo is significantly reduced, as the external lymph does not get enough power during the rotation. 
